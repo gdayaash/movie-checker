@@ -56,18 +56,22 @@ export default function App() {
 
   return (
     <>
-      <Nav movies={movies} />
-      <MovieBoxes movies={movies} watched={watched} />
+      <Nav>
+        <SearchBox />
+        <MovieResults movies={movies} />
+      </Nav>
+      <MovieBoxes>
+        <MoviesList movies={movies} /> <WatchedList watched={watched} />
+      </MovieBoxes>
     </>
   );
 }
 
-function Nav({ movies }) {
+function Nav({ children }) {
   return (
     <nav className="nav-bar">
       <Logo />
-      <SearchBox />
-      <MovieResults movies={movies} />
+      {children}
     </nav>
   );
 }
@@ -102,13 +106,8 @@ function MovieResults({ movies }) {
   );
 }
 
-function MovieBoxes({ movies, watched }) {
-  return (
-    <main className="main">
-      <MoviesList movies={movies} />
-      <WatchedList watched={watched} />
-    </main>
-  );
+function MovieBoxes({ children }) {
+  return <main className="main">{children}</main>;
 }
 
 function MoviesList({ movies }) {
