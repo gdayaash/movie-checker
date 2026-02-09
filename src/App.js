@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Star from "./components/Star";
+
 const tempMovieData = [
   {
     imdbID: "tt1375666",
@@ -63,6 +65,7 @@ export default function App() {
       <MovieBoxes>
         <Box>
           <MoviesList movies={movies} />
+          <Star />
         </Box>
         <Box>
           <Summary watched={watched} />
