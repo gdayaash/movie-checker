@@ -1,33 +1,50 @@
+import { useState } from "react";
+
 const StarBox = {
   display: "flex",
   alignItems: "center",
   gap: 4,
 };
 
-export default function Stars() {
+export default function Stars({ maxRating = 5 }) {
+  const [rating, setRating] = useState(0);
+  const [temp, setTemp] = useState(0);
   return (
-    <article role="button" style={StarBox}>
+    <article style={StarBox}>
       <aside>
-        {Array.from({ length: 5 }, (_, i) => (
-          <Star />
-        ))}
+        {Array.from({ length: maxRating }, (_, index) => {
+          const value = index + 1;
+          return (
+            <Star
+              filled={value <= (temp || rating)}
+              hover={() => setTemp(value)}
+              key={value}
+              leave={() => setTemp(0)}
+              click={() => setRating(value)}
+            />
+          );
+        })}
       </aside>
-      <aside>Rating Result</aside>
+      <aside>{rating || temp}</aside>
     </article>
   );
 }
 
-function Star() {
+function Star({ filled, hover, leave, click }) {
   const starStyle = {
     width: "20px",
   };
   return (
     <svg
+      role="button"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={filled ? "gold" : "none"}
       viewBox="0 0 24 24"
       stroke="#000"
       style={starStyle}
+      onMouseEnter={hover}
+      onMouseLeave={leave}
+      onClick={click}
     >
       <path
         strokeLinecap="round"
