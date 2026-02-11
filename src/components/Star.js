@@ -3,7 +3,7 @@ import { useState } from "react";
 const StarBox = {
   display: "flex",
   alignItems: "center",
-  gap: 4,
+  gap: 5,
 };
 
 export default function Stars({ maxRating = 5 }) {
@@ -25,7 +25,7 @@ export default function Stars({ maxRating = 5 }) {
           );
         })}
       </aside>
-      <aside>{rating || temp}</aside>
+      <aside>{rating || temp || ""}</aside>
     </article>
   );
 }
@@ -33,6 +33,7 @@ export default function Stars({ maxRating = 5 }) {
 function Star({ filled, hover, leave, click }) {
   const starStyle = {
     width: "20px",
+    margin: "0px 2px",
   };
   return (
     <svg
